@@ -1,0 +1,10 @@
+{
+  "packing_name": ["packing4"],
+  "page_name": ["auto_data", "report", "batch", "/0"],
+  "comm" : {
+    "packing4": {
+      "port": 502,
+      "ip": "10.38.244.244"
+    }
+  }
+}

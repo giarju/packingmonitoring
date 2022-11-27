@@ -1,0 +1,275 @@
+{
+    "live_info" : {
+        "mode" : {
+            "offset" : 0,
+            "type" : "int16",
+            "states" : {
+                "100" : "off_mode",
+                "200" : "stop_mode",
+                "300" : "stopping_mode",
+                "400" : "manual_mode",
+                "500" : "preparation_mode",
+                "600" : "automatic_mode"
+            } 
+        },
+        "sequence" : {
+            "offset" : 1,
+            "type" : "int16",
+            "states" : {
+                "1" : "initial",
+                "2" : "zero_scale_before_weighment",
+                "3" : "feeding_scale",
+                "4" : "sample_weighment",
+                "5" : "topup",
+                "6" : "out_of_tolerance",
+                "7" : "ready_to_discharge",
+                "8" : "discharging"
+            } 
+        },
+        "general_faults" : {
+            "offset" : 2,
+            "type" : "int16",
+            "states" : {
+                "0" : "emergency stop",
+                "1" : "low_air_pressure",
+                "2" : "catch_gate_not_open",
+                "3" : "system_error",
+                "4" : "discharge_door_not_closed",
+                "5" : "scale_exceeded_capacity",
+                "6" : "motor_failure"
+            } 
+        },
+        "blocking_faults" : {
+            "offset" : 3,
+            "type" : "int16",
+            "states" : {
+                "0" : "underweight",
+                "1" : "overweight",
+                "2" : "discharge_too_long"
+            } 
+        },
+        "stopping_faults" : {
+            "offset" : 4,
+            "type" : "int16",
+            "states" : {
+                "0" : "stabilisation too long",
+                "1" : "zero_out_of_range",
+                "2" : "bag_not_detected",
+                "3" : "hopper_illogical_detection",
+                "4" : "hopper_low_level"
+            } 
+        },
+        "warning_faults" : {
+            "offset" : 5,
+            "type" : "int16",
+            "states" : {
+                "0" : "low battery",
+                "1" : "slow_cycle",
+                "2" : "bulk_blank_too_long",
+                "3" : "dribble_blank_too_long",
+                "4" : "system_warning"
+            } 
+        },
+        "live_weight" : {
+            "offset" : 6,
+            "type" : "float32"
+        },
+        "scale_status" : {
+            "offset" : 8,
+            "type" : "int16",
+            "states" : {
+                "0" : "in service mode",
+                "1" : "scale_overloaded",
+                "2" : "scale_in_motion",
+                "3" : "scale_error",
+                "4" : "heart_beat",
+                "5" : "hopper_state",
+                "6" : "checkweight_state",
+                "7" : "algorithm_in_auto_tune",
+                "8" : "data_ready_for_update",
+                "9" : "handshake",
+                "10" : "swap_bytes"
+            } 
+        },
+        "active_weigh_program" : {
+            "offset" : 9,
+            "type" : "int16"
+        },
+        "unit" : {
+            "offset" : 10,
+            "type" : "str16"
+        },
+        "command" : {
+            "offset" : 12,
+            "type" : "int16"
+        },
+        "parameter" : {
+            "offset" : 13,
+            "type" : "int16"
+        }
+    },
+    "auto_data": {
+        "wp_no" : {
+            "offset" : 16,
+            "type" : "float32"
+        },
+        "target_weight" : {
+            "offset" : 18,
+            "type" : "float32"
+        },
+        "avg" : {
+            "offset" : 20,
+            "type" : "float32"
+        },
+        "sd" : {
+            "offset" : 22,
+            "type" : "float32"
+        },
+        "last_checked" : {
+            "offset" : 24,
+            "type" : "float32"
+        },
+        "accepted_units" : {
+            "offset" : 26,
+            "type" : "float32"
+        },
+        "w_units_done" : {
+            "offset" : 28,
+            "type" : "float32"
+        },
+        "w_units_preset" : {
+            "offset" : 30,
+            "type" : "float32"
+        },
+        "units_done" : {
+            "offset" : 32,
+            "type" : "float32"
+        },
+        "batch_units" : {
+            "offset" : 34,
+            "type" : "float32"
+        },
+        "batch_preset" : {
+            "offset" : 36,
+            "type" : "float32"
+        },
+        "weigh_per_min" : {
+            "offset" : 38,
+            "type" : "float32"
+        },
+        "bulk_time" : {
+            "offset" : 40,
+            "type" : "float32"
+        },
+        "dribble_time" : {
+            "offset" : 42,
+            "type" : "float32"
+        },
+        "cycle_time" : {
+            "offset" : 44,
+            "type" : "float32"
+        }
+    },
+    "report" : {
+        "wp_no" : {
+            "offset" : 16,
+            "type" : "float32"
+        },
+        "total_units" : {
+            "offset" : 18,
+            "type" : "float32"
+        },
+        "accepted_units" : {
+            "offset" : 20,
+            "type" : "float32"
+        },
+        "underweight" : {
+            "offset" : 22,
+            "type" : "float32"
+        },
+        "overweight" : {
+            "offset" : 24,
+            "type" : "float32"
+        },
+        "total_weight" : {
+            "offset" : 26,
+            "type" : "float32"
+        },
+        "total_weighments_lifetime" : {
+            "offset" : 28,
+            "type" : "float32"
+        },
+        "total_units_lifetime" : {
+            "offset" : 30,
+            "type" : "float32"
+        },
+        "total_weight_lifetime" : {
+            "offset" : 32,
+            "type" : "float32"
+        }
+    },
+    "batch" : {
+        "preset" : {
+            "offset" : 16,
+            "type" : "float32"
+        },
+        "units_done" : {
+            "offset" : 18,
+            "type" : "float32"
+        },
+        "units_accepted" : {
+            "offset" : 20,
+            "type" : "float32"
+        },
+        "underweight" : {
+            "offset" : 22,
+            "type" : "float32"
+        },
+        "overweight" : {
+            "offset" : 24,
+            "type" : "float32"
+        },
+        "total_weight" : {
+            "offset" : 26,
+            "type" : "float32"
+        },
+        "minimum_accepted" : {
+            "offset" : 28,
+            "type" : "float32"
+        },
+        "maximum_accepted" : {
+            "offset" : 30,
+            "type" : "float32"
+        },
+        "residual" : {
+            "offset" : 32,
+            "type" : "float32"
+        },
+        "sd" : {
+            "offset" : 34,
+            "type" : "float32"
+        },
+        "avg" : {
+            "offset" : 36,
+            "type" : "float32"
+        },
+        "count_all" : {
+            "offset" : 38,
+            "type" : "float32"
+        }
+    },
+    "cmd" : {
+        "auto_data" : {
+            "number" : 320,
+            "param" : 32
+        },
+        "report" : {
+            "number" : 320,
+            "param" : 40
+        },
+        "batch" : {
+            "number" : 320,
+            "param" : 50
+        }
+    }
+}
