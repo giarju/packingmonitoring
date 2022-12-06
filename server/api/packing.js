@@ -1,6 +1,7 @@
 const express = require("express");
 // const bodyParser = require('body-parser');
 const packinginfo = require('../database/schema/PackingInfo.js').PackingInfo
+const packinghist = require('../database/schema/PackingHist.js').PackingHist
 const summary = require('../database/schema/Summary.js').Summary
 // const rejectinfo = require('../database/schema/RejectInfo.js').RejectInfo
 // const downtime = require('../database/schema/Downtime.js').Downtime
@@ -8,12 +9,39 @@ const speedac_modbus = require('../running/speedaciq/modbus_tcp.js')
 const config = require("../running/speedaciq/config.json")
 const packingdb_op = require("../running/speedaciq/db_op.js")
 const { Op } = require("sequelize");
+let packing_daq = require('./../running/speedaciq/daq.js')
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json()
 
 
 
 const router = express.Router();
 // const jsonParser = bodyParser.json()
 
+router.post("/start_packing", jsonParser, async (req, res) => {
+  // call a function to set interval and start logging
+
+  packing_daq.count_interval[req.body.packing_name] = {};
+
+  await packing_daq.initGetCount(req.body.packing_name)
+  await packing_daq.readCountInterval(req.body.packing_name, packing_daq.count_interval);
+  res.status(201).send();
+});
+
+
+router.post("/stop_packing", async (req, res) => {
+  // call function to clear interval and stop logging data a specific packing
+
+  await packing_daq.clearCountInterval(req.body.packing_name, packing_daq.count_interval);
+  await packing_daq.saveCount(req.body.packing_name);
+  res.status(201).send();
+});
+
+router.get("/test", async (req,res) => {
+  res.status(201).send();
+})
+
+/*
 router.get("/report", async (req, res) => {
   // console.log(req)
   const summ = await summary.findAll({
@@ -143,5 +171,5 @@ router.get("/live", async (req, res) => {
   })
   // console.log(JSON.stringify(packing_info, null, 2)); 
 });
-
+*/
 module.exports = router;

@@ -16,6 +16,7 @@ module.exports = {
   writeParam,
   getPage,
   readAllPacking,
+  readPacking,
   readAllLive,
   readDataStream
 };
@@ -28,7 +29,7 @@ function readData(name, callback) {
   modbus.tcp.connect(
     comm[name].port,
     comm[name].ip,
-    { debug: name },
+    { debug: name }, 
     (err, connection) => {
       if (err) throw err;
 
@@ -99,7 +100,7 @@ function readData(name, callback) {
 }
 
 function readHoldingWrapper(connection, comm_param){
-  console.time('test')
+  // console.time('test')
   connection.readHoldingRegisters(
     { address: 0, quantity: 64 },
     (err, res) => {
@@ -289,6 +290,49 @@ function readAllPacking(){
                   } 
               }  
           }
+
+          count += 1;
+
+          if (done && count < 10){
+              resolve(res);
+              clearInterval(check_interval);
+          } 
+          else if (count > 10){
+              reject('Error : Timout Reached');
+              clearInterval(check_interval);
+          }
+          
+      }, 1000);
+  });
+}
+
+function readPacking(packing, page){
+  
+  let packing_name = config.packing_name;
+  let page_name = config.page_name
+  let res = {};
+  let j = 0;
+
+  res[packing_name[packing]] = {};
+  // recursePacking(null,res,packing_name[packing],page_name,j,recursePacking);
+  res[packing_name[packing]] = {
+    "dummy" : "dummy"
+  }
+  
+  return new Promise((resolve, reject) => {
+      let count = 0;
+      let check_interval = setInterval(() => {
+
+          let done = true;
+          // for (let page in page_name) {
+          //     if (page_name[page] !== '/0'){
+          //         if (res[packing_name[packing]][page_name[page]] === undefined){
+          //             done = false;
+          //         }
+          //     } 
+          // }  
+
+          count += 1;
 
           if (done && count < 10){
               resolve(res);

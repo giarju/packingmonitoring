@@ -11,7 +11,7 @@ db.authenticate()
 
 // packinginfo.sync({alter : true});
 
-db.sync({ alter: true });
+// db.sync({ alter: true });
 
 // async function main(){
 //     const info = await packinginfo.findAll();

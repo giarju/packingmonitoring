@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const packing = new Sequelize('speedaciq', 'sa', '123', {
+const packing = new Sequelize('packing', 'sa', '123456', {
     host: 'localhost',
     dialect: 'mssql',  
      

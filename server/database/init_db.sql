@@ -1,9 +1,7 @@
 
-USE speedaciq;
+USE packing;
 
-drop table packing_info, downtime, revision
-
-DROP TABLE downtime
+drop table PackingHist, PackingInfo
 
 /*drop table dev
 
@@ -25,88 +23,53 @@ CREATE TABLE dev (
 	
 );*/
 
-CREATE TABLE packing_info (
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	date_time DATETIME2,
-	packing_num INT NOT NULL,
-	total_count INT NOT NULL,
-	total_weight FLOAT NOT NULL,
-	count_change INT NOT NULL,
-	weight_change FLOAT NOT NULL
+CREATE TABLE PackingInfo (
+	packing_id VARCHAR(32) PRIMARY KEY,
+	start_time DATETIME2 NOT NULL,
+  end_time DATETIME2 NOT NULL,
+	start_count INT NOT NULL,
+  end_count INT NOT NULL,
+  createdAt DATETIME2,
+  updatedAt DATETIME2,
 );
 
-CREATE TABLE revision (
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	date_time DATETIME2,
-	username VARCHAR(64) NOT NULL,
-	reject_count INT NOT NULL,
-	packing_num INT NOT NULL,
-	reason VARCHAR(255) NOT NULL
+CREATE TABLE PackingHist (
+  num INT IDENTITY(1,1) PRIMARY KEY,
+	packing_id VARCHAR(32) NOT NULL,
+	start_time DATETIME2 NOT NULL,
+  end_time DATETIME2 NOT NULL,
+	total_bag INT NOT NULL,
+  createdAt DATETIME2,
+  updatedAt DATETIME2,
 );
 
-CREATE TABLE downtime (
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	start_time DATETIME2,
-	resolve_time DATETIME2,
-	total_time INT,
-	packing_num INT NOT NULL,
-	reason VARCHAR(255),
-)
-
-CREATE TABLE userlogin (
-	username VARCHAR(64) PRIMARY KEY,
-	pwd VARCHAR(255) NOT NULL
-)
-
-INSERT INTO packing_info(
-    date_time,
-	packing_num,
-	total_count,
-	total_weight,
-	count_change,
-	weight_change
+INSERT INTO PackingInfo(
+  packing_id,
+	start_time,
+  end_time,
+	start_count,
+  end_count
 )
 VALUES
-    ('2021-4-22 21:09:10', 4, 1000, 22344.5, 0, 0),
-	('2021-4-22 21:19:10', 4, 1010, 22355, 10, 10.5),
-	('2021-4-22 21:09:10', 3, 1000, 22344.5, 0, 0),
-	('2021-4-22 21:19:10', 3, 1011, 22356, 11, 11.5),
-	('2021-4-22 21:09:10', 2, 1000, 22344.5, 0, 0)
+  ('packing4','2021-4-22 21:09:10', '2021-4-22 21:10:10', 1000, 1010),
+  ('packing3','2021-4-22 21:09:10', '2021-4-22 21:10:10', 1000, 1010)
 
-
-
-INSERT INTO revision(
-    date_time,
-	username,
-	reject_count,
-	packing_num,
-	reason
+INSERT INTO PackingHist(
+  packing_id,
+	start_time,
+  end_time,
+	total_bag
 )
 VALUES
-    ('2021-4-22 23:09:10', 'auto',1, 4, 'overweight'),
-	('2021-4-22 23:18:10', 'ali',2, 4, 'broken'),
-	('2021-4-22 23:19:10', 'auto',1, 4, 'overweight'),
-	('2021-4-22 23:09:10', 'auto',2, 3, 'underweight')
+  ('packing4','2021-4-22 21:09:10', '2021-4-22 21:10:10',10),
+  ('packing3','2021-4-22 21:09:10', '2021-4-22 21:10:10',10),
+  ('packing4','2021-4-23 21:09:10', '2021-4-23 21:10:10',10),
+  ('packing3','2021-4-23 21:09:10', '2021-4-23 21:10:10',10),
+  ('packing4','2021-4-24 21:09:10', '2021-4-24 21:10:10',10),
+  ('packing3','2021-4-24 21:09:10', '2021-4-24 21:10:10',10)
+
+select * from PackingInfo
+select * from PackingHist
 
 
-INSERT INTO downtime(
-    start_time,
-	resolve_time,
-	total_time,
-	packing_num,
-	reason
-)
-VALUES
-    ('2021-4-22 13:09:10', '2021-4-22 13:39:10',30, 2, 'fault'),
-	('2021-4-22 15:09:10', '2021-4-22 15:39:10',30, 3, 'warning'),
-	('2021-4-22 16:09:10', null,null, 3, null)
-
-INSERT INTO userlogin(
-	username,
-	pwd
-)
-VALUES
-	('ali', 'ali'),
-	('baba', 'baba')
-
-select * from userlogin
+delete from PackingInfo where packing_id = 'packing4'

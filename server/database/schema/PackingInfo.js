@@ -7,27 +7,34 @@ class PackingInfo extends Model {
 
 PackingInfo.init({
   // Model attributes are defined here
-  id: {
+  packing_id: {
     type: DataTypes.INTEGER,
     primaryKey : true,
-    autoIncrement : true,
   },
-  packing_name: {
-    type: DataTypes.STRING,
+  start_time: {
+    type: DataTypes.DATE,
     allowNull: false
   },
-  status:{
+  end_time: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  start_count: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  total_count: {
+  end_count: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  total_weight: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  }
+  createdAt: {
+    type : DataTypes.DATE,
+    allowNull: true
+  },
+  updatedAt: {
+    type : DataTypes.DATE,
+    allowNull: true
+  },
 }, {
   // Other model options go here
   sequelize: db, // We need to pass the connection instance
